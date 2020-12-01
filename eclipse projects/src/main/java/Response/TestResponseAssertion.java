@@ -2,31 +2,47 @@ package Response;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import cucumber.api.PendingException;
 import io.retsassured.RestAssured;
 import io.restassured.response.Response;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
-public class TestResponseAssertion {
+public class ResponeAssertions {
 	
-	@Test
-	public void user()
-	{
+	@Given("^Customer has API for foreign exchange rates$")
+	public void customer_has_API_for_foreign_exchange_rates() throws Throwable {
+		
 		Response response;
 		
-		response = RestAssured.get("http://10.82.48.225:8081/EDUBank/ExchangeRate?currency=dollar&value = 50");
+		@Test
+		@Given("^Customer has API for foreign exchange rates$")
+		public void customer_has_API_for_foreign_exchange_rates() throws Throwable {
+			
+				RestAssured.baseURI("https://https://api.ratesapi.io/api/latest");
+		    
+		  
+		}
+
+		@Test
+		@When("^posted with correct information$")
+		public void posted_with_correct_information() throws Throwable {
+			
+			response = RestAssured.get("/api/latest");
+		    // Write code here that turns the phrase above into concrete actions
+		    
+		}
+
+	@Test
+	@Then("^validate response code received$")
+	public void validate_response_code_received() throws Throwable {
 		
 		int statusCode = response.getStatuscode();
 		Assert.assertEquals(statusCode,200,"Incorrect status code returned");
-		
-		String statusLine = response.getStatusLine();
-		Assert.assertEquals(statusLine,"http://1.1 200","Incorrect status line returned");
-		
+	    // Write code here that turns the phrase above into concrete actions
 		String contentType = response.getContentType();
-		Assert.assertEquals(contentType,"application/json");
-		
-		String responseBody = response.getBody().asString();
-		Assert.assertEquals(responseBody.contains("dollar"),true,"Response body does not contain dollar");
-		
-		
+		Assert.assertTrue(contentType,"application/json");
 	}
 
 }
