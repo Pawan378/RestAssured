@@ -3,7 +3,7 @@
 <suite name="Suite">
 <test name="Test">
 <classes>
-<class name= "demos.TestNGRunnerTest"></class>
+<class name= "TestRunner.TestNGRunnerTest"></class>
 </classes>
 </test>
 </suite>
