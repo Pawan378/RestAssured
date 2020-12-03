@@ -13,6 +13,7 @@ import StepDefinitions.Response;
 import StepDefinitions.Then;
 import StepDefinitions.When;
 import cucumber.api.PendingException;
+import org.testng.Annotations;
 
 public class TestParameterizationDemo {
 	
@@ -36,6 +37,21 @@ public class TestParameterizationDemo {
 	    // Write code here that turns the phrase above into concrete actions
 	    
 	}
+	
+	@DataProvider(name="currreny")
+	public Object[][] getData()
+	{
+		Object[][] obj = new Object[3][1]();
+		
+		obj[0][1] = "dollar";
+		obj[1][1] = "Euro";
+		obj[2][1] = "yen";
+		
+		return obj;		
+		
+		
+	}
+
 	
 	@Test
 	public void user() throws IOException
