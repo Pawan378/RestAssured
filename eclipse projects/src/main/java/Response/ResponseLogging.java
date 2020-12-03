@@ -1,6 +1,6 @@
 package Response;
 
-import Response.Response;
+
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -48,7 +48,46 @@ public class ResponeLogging {
 		        log().all();
 		
 		
-	}
+		public void validate_response_code_received_incorrectUrl() throws Throwable
+		{
+			response = RestAssured.get("/api/lest");
+			
+			int statusCode = response.getStatuscode();
+			Assert.assertEquals(statusCode,400,"Bad Request");
+			
+			RestAssured.requestSpecification = new RequestSpecBuilder().
+			        setBaseUri("https://https://api.ratesapi.io/api/latest").
+			        setContentType(ContentType.JSON).
+			        build().
+			        log().all();
+			RestAssured.responseSpecification = new ResponseSpecBuilder().
+			        build().
+			        log().all();
+			
+		}
+		
+		
+		public void validate_response_code_serverUnavailable() throws Throwable
+		{
+			response = RestAssured.get("/api/latest");
+			response.invalidate();
+			
+			int statusCode = response.getStatuscode();
+			Assert.assertEquals(statusCode,500,"Internal Server Error");
+			
+			RestAssured.requestSpecification = new RequestSpecBuilder().
+			        setBaseUri("https://https://api.ratesapi.io/api/latest").
+			        setContentType(ContentType.JSON).
+			        build().
+			        log().all();
+			RestAssured.responseSpecification = new ResponseSpecBuilder().
+			        build().
+			        log().all();
+			
+		}
+		
+		
+	
 
 	
 
